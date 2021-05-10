@@ -5,7 +5,7 @@ const { isLoggedIn } = require('../lib/auth');
 
 router.get('/add', isLoggedIn, (req, res) => {
     res.render('links/add');
-})
+});
 
 router.post('/add', isLoggedIn, async(req, res) => {
     const { title, url, description } = req.body;
@@ -51,6 +51,7 @@ router.post('/edit/:id', isLoggedIn, async(req, res) => {
     req.flash('success', 'Link edited successfully');
     res.redirect('/links');
 })
+
 
 
 module.exports = router;

@@ -58,5 +58,5 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Servidor
 app.listen(app.get('port'), () => {
-    console.log('Servidor en puerto', app.get('port'));
-})
+    console.log('PORT: ', app.get('port'));
+});

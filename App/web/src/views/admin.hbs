@@ -1,0 +1,76 @@
+<div class="container p-4 overflow-auto">
+    <div class="row">
+        <div class="col-md-4 md-6 mx-auto ">
+            <div class="card text-center events">
+                <div class="card-body">
+                    <h1>Admin View</h1>
+                    <h3>BOOKINGS:</h3>
+                    <ul class="list-group list-group-flush">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">User</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Phone</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            </thead>
+                            {{#each bookings}}
+                            <tr>
+                                <li>
+                                    <td>{{user_name}}</td>
+                                    <td>{{bk_date}}</td>
+                                    <td>{{phone}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </li>
+                            </tr>
+                            {{/each}}
+                        </table>
+                    </ul>
+                    <h3>EVENTS</h3>
+                    <ul class="list-group list-group-flush">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Event</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Phone</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            </thead>
+                            {{#each events}}
+                            <tr>
+                                <li>
+                                    <td>{{event_name}}</td>
+                                    <td>{{event_date}}</td>
+                                    <td>{{phone}}</td>
+                                    <td>
+                                        <a href="/event_delete/{{id}}" class="btn btn-danger"> <i
+                                                class="fas fa-trash-alt"></i></a>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-secondary">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </td>
+                                </li>
+                            </tr>
+                            {{/each}}
+                        </table>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
