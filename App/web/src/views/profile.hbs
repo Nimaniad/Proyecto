@@ -1,34 +1,39 @@
 <div class="container p-4 overflow-auto">
     <div class="row">
-        <div class="col-md-4 mx-auto ">
+        <div class="col-md-12 conl-lg-12 col-sm-12 mx-auto columna">
             <div class="card text-center">
                 <div class="card-body">
                     <h3>{{user.fullname}}</h3>
-                    <a href="/links" class="btn btn-success m-4">Go to your links</a>
-                    <p>Your Bookings:</p>
-                </div>
-            </div>
-            <div class="card text-center">
-                <div class="card-body">
                     <ul class="list-group list-group-flush">
-                        <table class="table">
+                        <p>Your Bookings:</p>
+                        <table id="tabla_bookings" class="table-responsive-sm table-responsive-lg mx-auto pt-2 events">
+                            {{#each bookings}}
                             <thead>
+                                
                                 <tr>
-                                    <th scope="col">Event</th>
                                     <th scope="col">Date</th>
+                                    <th scope="col">Hour</th>
                                     <th scope="col">Phone</th>
+                                    <th></th>
                                 </tr>
                             </thead>
-                            </thead>
-                                {{#each bookings}}
-                                <tr>
+                            
+                            <tr>
                                 <li>
-                                    <td>{{user_name}}</td>
                                     <td>{{bk_date}}</td>
+                                    <td>{{bk_time}}</td>
                                     <td>{{phone}}</td>
-                                 </li>
-                                </tr>
-                                {{/each}}
+                                    <td>
+                                        <a href="/booking_delete/{{id}}" class="btn btn-danger">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                </li>
+                            </tr>
+                            {{else}}
+                            <p>There are no bookings yet.</p>
+                            <a href="/booking">Reserve one now!</a>
+                            {{/each}}
                         </table>
                     </ul>
                 </div>

@@ -1,17 +1,18 @@
 <div class="container p-4 overflow-auto">
     <div class="row">
-        <div class="col-md-4 md-6 mx-auto ">
+        <div class="col-md-12 conl-lg-12 col-sm-12 mx-auto columna">
             <div class="card text-center events">
                 <div class="card-body">
                     <h1>Admin View</h1>
                     <h3>BOOKINGS:</h3>
-                    <ul class="list-group list-group-flush">
-                        <table class="table">
+                    <ul class="list-group list-group-flush ">
+                        <table id="tabla_bookings" class="table-responsive-sm table-responsive-lg mx-auto pt-2 ">
                             <thead>
                                 <tr>
-                                    <th scope="col">User</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Phone</th>
+                                    <th scope="col col-sm-12">User</th>
+                                    <th scope="col col-sm-12">Date</th>
+                                    <th scope="col col-sm-12">Hour</th>
+                                    <th scope="col col-sm-12">Phone</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -21,25 +22,25 @@
                                 <li>
                                     <td>{{user_name}}</td>
                                     <td>{{bk_date}}</td>
+                                    <td>{{bk_time}}</td>
                                     <td>{{phone}}</td>
                                     <td>
-                                        <button type="button" class="btn btn-danger">
+                                        <a href="/booking_delete/{{id}}" class="btn btn-danger">
                                             <i class="fas fa-trash-alt"></i>
-                                        </button>
+                                        </a>
                                     </td>
                                 </li>
                             </tr>
                             {{/each}}
                         </table>
                     </ul>
-                    <h3>EVENTS</h3>
+                    <h3 class ="pt-4">EVENTS</h3>
                     <ul class="list-group list-group-flush">
-                        <table class="table">
+                        <table id="tabla_events" class="table-responsive-sm table-responsive-lg mx-auto pt-2 ">
                             <thead>
                                 <tr>
-                                    <th scope="col">Event</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Phone</th>
+                                    <th scope="col pt-2">Event</th>
+                                    <th scope="col pt-2">Date</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -50,14 +51,15 @@
                                 <li>
                                     <td>{{event_name}}</td>
                                     <td>{{event_date}}</td>
-                                    <td>{{phone}}</td>
                                     <td>
-                                        <a href="/event_delete/{{id}}" class="btn btn-danger"> <i
-                                                class="fas fa-trash-alt"></i></a>
+                                        <a href="/event_delete/{{id}}" class="btn btn-danger">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-secondary">
+                                        <a href="/event_edit/{{id}}" class="btn btn-secondary">
                                             <i class="fas fa-edit"></i>
+                                        </a>
                                         </button>
                                     </td>
                                 </li>
@@ -65,6 +67,9 @@
                             {{/each}}
                         </table>
                     </ul>
+                    <div class="card text-center events mt-4">
+                        <a href="/events_admin" class="btn btn-success ">Create new event</a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -24,6 +24,7 @@ CREATE TABLE events (
         description TEXT,
         phone INT,
         event_date DATETIME NOT NULL,
+        event_time TEXT NOT NULL,
         user_id INT NOT NULL,
         PRIMARY KEY(id)
 );
@@ -33,6 +34,7 @@ CREATE TABLE bookings (
         id INT NOT NULL AUTO_INCREMENT,
         user_name VARCHAR(100),
         bk_date DATETIME NOT NULL,
+        bk_time TEXT NOT NULL,
         phone INT,
         user_id INT NOT NULL,
         PRIMARY KEY(id)
