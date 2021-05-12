@@ -1,8 +1,0 @@
-
-- Transformar el proyecto en una aplicación web y contenerla por medio de una PWA y que funcione en móviles.
-
-- Tendremos las capacidad de las Web con el caché de los móviles y la seguridad que da una aplicación instalada al usuario.
-
-- Además podremos tener notificaciones lo cual nos ayudará para que en a app que estoy realizando puyeda avisarte de cuando tienes los eventos.
-
-- con un manifest podremos añadir un icono a la pantalla principal de nuestro teléfono.
