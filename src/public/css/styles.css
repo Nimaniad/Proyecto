@@ -5,8 +5,23 @@ body {
     background: linear-gradient(to right, #4145b0, #2a72ce);
 }
 
+.video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -10;
+}
+
+.arriba {
+    z-index: 1;
+}
+
 .navbar {
     background: linear-gradient(to right, #4145b0, #2a72ce);
+    z-index: 10;
 }
 
 .index {
@@ -42,10 +57,19 @@ body {
     }
 }
 
-.social-icons img {
-    width: 30px;
-    margin: 0 8px;
-    margin-top: 10%;
+.social-icons {
+    color: white;
+    margin: 0 30px;
+    padding-top: 30px;
+    box-shadow: 0 0 20 0 #7f7f7f3d;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.social-icons-2 {
+    color: #4145b0;
+    margin: 0 30px;
+    padding-top: 30px;
     box-shadow: 0 0 20 0 #7f7f7f3d;
     cursor: pointer;
     border-radius: 50%;
@@ -74,7 +98,7 @@ body {
     border-bottom: 1px solid rgb(255, 255, 255, 0.3);
 }
 
-.info {
+.contact-info {
     color: white;
 }
 
@@ -122,4 +146,12 @@ li {
     color: black;
     border-radius: 0px;
     border-bottom: 1px solid #2a72ce;
+}
+
+.button-profile {
+    color: white;
+}
+
+table td {
+    min-width: 70px;
 }

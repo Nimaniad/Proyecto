@@ -80,7 +80,7 @@ router.get('/contact', isLoggedIn, (req, res) => {
 });
 
 router.get('/events', isLoggedIn, async(req, res) => {
-    const events = await pool.query("SELECT id, event_name, description, phone,  DATE_FORMAT(event_date, '%d-%m-%Y') AS event_date, user_id, event_time " +
+    const events = await pool.query("SELECT id, event_name, adress, description, phone,  DATE_FORMAT(event_date, '%d-%m-%Y') AS event_date, user_id, event_time " +
         "FROM events ORDER BY event_date ASC");
     res.render('events', { events });
 
@@ -88,17 +88,15 @@ router.get('/events', isLoggedIn, async(req, res) => {
 
 router.get('/events/:id', isLoggedIn, async(req, res) => {
     const { id } = req.params;
-    const events = await pool.query("SELECT id, event_name, description, phone,  DATE_FORMAT(event_date, '%d-%m-%Y') AS event_date, user_id, event_time" +
-        "FROM events WHERE id = ? ORDER BY event_date DESC", [id]);
-    console.log(events);
+    const events = await pool.query("SELECT event_name, adress, DATE_FORMAT(event_date, '%d-%m-%Y') AS event_date, phone, description " +
+        "FROM events WHERE id = ?", [id]);
     res.render('event_info', { events });
-
 });
 
 router.get('/admin', isLoggedIn, async(req, res) => {
     const bookings = await pool.query("SELECT id, user_name, DATE_FORMAT(bk_date, '%d-%m-%Y') AS bk_date, phone, user_id, bk_time FROM bookings ORDER BY bk_date ASC");
     console.log('BOOKINGS: ' + bookings);
-    const events = await pool.query("SELECT id, event_name, description, phone,  DATE_FORMAT(event_date, '%d-%m-%Y') AS event_date, user_id FROM events ORDER BY event_date ASC");
+    const events = await pool.query("SELECT id, event_name, adress, description, phone,  DATE_FORMAT(event_date, '%d-%m-%Y') AS event_date, user_id FROM events ORDER BY event_date ASC");
     console.log('EVENTS: ' + events);
     res.render('admin', { bookings, events });
 
@@ -109,10 +107,11 @@ router.get('/events_admin', isLoggedIn, (req, res) => {
 });
 
 router.post('/events_admin', isLoggedIn, async(req, res) => {
-    const { event_name, event_date, description, phone, event_time } = req.body;
+    const { event_name, event_date, adress, description, phone, event_time } = req.body;
     const newLink = {
         event_name,
         event_date,
+        adress,
         description,
         phone,
         user_id: req.user.id,
@@ -138,10 +137,11 @@ router.get('/event_edit/:id', isLoggedIn, async(req, res) => {
 
 router.post('/event_edit/:id', isLoggedIn, async(req, res) => {
     const { id } = req.params;
-    const { event_name, event_date, description, phone, event_time } = req.body;
+    const { event_name, adress, event_date, description, phone, event_time } = req.body;
     const newLink = {
         event_name,
         event_date,
+        adress,
         description,
         phone,
         event_time
