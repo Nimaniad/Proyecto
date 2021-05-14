@@ -159,6 +159,4 @@ router.get('/booking_delete/:id', isLoggedIn, async(req, res) => {
 });
 
 
-
-
 module.exports = router;
