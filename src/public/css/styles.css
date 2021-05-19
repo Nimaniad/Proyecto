@@ -1,8 +1,11 @@
 body {
     background: #f5f6f5;
-    overflow: hidden;
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(to right, #4145b0, #2a72ce);
+}
+
+.title {
+    text-shadow: 0.1em 0.1em 0.2em black
 }
 
 .video {
@@ -144,8 +147,6 @@ li {
 .info {
     background: white;
     color: black;
-    border-radius: 0px;
-    border-bottom: 1px solid #2a72ce;
 }
 
 .button-profile {

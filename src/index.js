@@ -51,7 +51,7 @@ app.use((req, res, next) => {
 // Rutas
 app.use(require('./routes'));
 app.use(require('./routes/authentication'));
-app.use('/links', require('./routes/links'));
+//app.use('/links', require('./routes/links'));
 
 // Archivos Públicos
 app.use(express.static(path.join(__dirname, 'public')));
