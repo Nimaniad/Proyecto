@@ -6,12 +6,8 @@ USE web;
 CREATE TABLE users (
         id INT NOT NULL AUTO_INCREMENT,
         user VARCHAR(20) NOT NULL,
-        name VARCHAR(100),
-        email VARCHAR(50) NOT NULL,
+        fullname VARCHAR(100),
         password VARCHAR(30) NOT NULL,
-        phone INT,
-        adress TEXT,
-        user_avatar TEXT,
         fecha_registro DATETIME NOT NULL DEFAULT current_timestamp,
         PRIMARY KEY(id)
 );

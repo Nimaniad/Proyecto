@@ -1,3 +1,6 @@
+{{!-- Vista común de la barra de navegación --}}
+
+{{!-- Barra de navegación usando la librería de Bootstrap 4--}}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="/">Virtual ON</a>
@@ -7,6 +10,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
+        {{!-- Condicional que permitirá esta parte de la vista solo si el usuario está logeado correctamente --}}
         {{#if user}}
         
         <li class="nav-item">
@@ -28,6 +32,7 @@
           <a href="/logout" class="nav-link active">Logout</a>
         </li>
         
+        {{!-- Esto es lo que se verá si el usuario no está logeado --}}
         {{else}}
 
         <li class="nav-item">

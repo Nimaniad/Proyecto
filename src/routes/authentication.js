@@ -1,3 +1,8 @@
+/* Script de la redireccion de las rutas.
+ * Usamos las funciones asíncronas con Async/await para generar unas ordenes más sincronizadas
+ * y devolver directamente los valores que devolverían las promesas. Un método más compacto y 
+ * minimalista de escribirlo.
+ */
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
@@ -5,25 +10,30 @@ const { isLoggedIn } = require('../lib/auth');
 const { isNotLoggedIn } = require('../lib/auth');
 const pool = require('../database');
 
+// Ruta para la vista Home 
 router.get('/home', isLoggedIn, (req, res) => {
     res.render('home');
 });
 
+// Ruta para la vista signup
 router.get('/signup', isNotLoggedIn, (req, res) => {
     res.render('auth/signup');
 });
 
+// Ejecutar el registro de usuario
 router.post('/signup', isNotLoggedIn, passport.authenticate('local.signup', {
     successRedirect: '/profile',
     failureRedirect: '/signup',
     failureFlash: true
 }));
 
+// Ruta para la vista signin
 router.get('/signin', isNotLoggedIn, (req, res) => {
     res.render('auth/signin');
 
 });
 
+// Ejecutar login del usuario
 router.post('/signin', isNotLoggedIn, (req, res, next) => {
 
     passport.authenticate('local.signin', {
@@ -33,11 +43,11 @@ router.post('/signin', isNotLoggedIn, (req, res, next) => {
     })(req, res, next);
 });
 
+// Ruta para la vista profile
 router.get('/profile', isLoggedIn, async(req, res) => {
     if (req.user.id == 1) {
         res.redirect('admin')
     } else {
-        //const bookings = await pool.query('SELECT * FROM bookings WHERE user_id = ?', [req.user.id]);
         const bookings = await pool.query("SELECT id, user_name, DATE_FORMAT(bk_date, '%d-%m-%Y') AS bk_date, phone, user_id, bk_time " +
             "FROM bookings  WHERE user_id = ? ORDER BY bk_date ASC", [req.user.id]);
         console.log(bookings);
@@ -45,21 +55,19 @@ router.get('/profile', isLoggedIn, async(req, res) => {
     }
 });
 
-router.post('/profile', (req, res) => {
-
-})
-
+// Ruta para el logout del usuario
 router.get('/logout', isLoggedIn, (req, res) => {
     req.logOut();
     res.redirect('/signin');
 });
 
 
-
+// Ruta para la vista booking
 router.get('/booking', isLoggedIn, (req, res) => {
     res.render('booking');
 });
 
+// Guardar las reservas en la base de datos
 router.post('/booking', isLoggedIn, async(req, res) => {
     const { bk_date, phone, bk_time } = req.body;
     const newLink = {
@@ -75,10 +83,12 @@ router.post('/booking', isLoggedIn, async(req, res) => {
     res.redirect('/profile');
 });
 
+// Ruta para la vista contact
 router.get('/contact', isLoggedIn, (req, res) => {
     res.render('contact');
 });
 
+// Ruta para la vista events
 router.get('/events', isLoggedIn, async(req, res) => {
     const events = await pool.query("SELECT id, event_name, adress, description, phone,  DATE_FORMAT(event_date, '%d-%m-%Y') AS event_date, user_id, event_time " +
         "FROM events ORDER BY event_date ASC");
@@ -86,6 +96,7 @@ router.get('/events', isLoggedIn, async(req, res) => {
 
 });
 
+// Ruta para la vista de un evento específico según el id seleccionado
 router.get('/events/:id', isLoggedIn, async(req, res) => {
     const { id } = req.params;
     const events = await pool.query("SELECT event_name, adress, DATE_FORMAT(event_date, '%d-%m-%Y') AS event_date, phone, description " +
@@ -93,19 +104,24 @@ router.get('/events/:id', isLoggedIn, async(req, res) => {
     res.render('event_info', { events });
 });
 
+// Ruta para la vista del administrador
 router.get('/admin', isLoggedIn, async(req, res) => {
-    const bookings = await pool.query("SELECT id, user_name, DATE_FORMAT(bk_date, '%d-%m-%Y') AS bk_date, phone, user_id, bk_time FROM bookings ORDER BY bk_date ASC");
+    const bookings = await pool.query("SELECT id, user_name, DATE_FORMAT(bk_date, '%d-%m-%Y') AS bk_date," +
+        " phone, user_id, bk_time FROM bookings ORDER BY bk_date ASC");
     console.log('BOOKINGS: ' + bookings);
-    const events = await pool.query("SELECT id, event_name, adress, description, phone,  DATE_FORMAT(event_date, '%d-%m-%Y') AS event_date, user_id FROM events ORDER BY event_date ASC");
+    const events = await pool.query("SELECT id, event_name, adress, description, phone,  " +
+        "DATE_FORMAT(event_date, '%d-%m-%Y') AS event_date, user_id FROM events ORDER BY event_date ASC");
     console.log('EVENTS: ' + events);
     res.render('admin', { bookings, events });
 
 });
 
+// Ruta para la vista de creacion de evento para el administrador
 router.get('/events_admin', isLoggedIn, (req, res) => {
     res.render('events_admin');
 });
 
+// Creacion de eventos en la base de datos
 router.post('/events_admin', isLoggedIn, async(req, res) => {
     const { event_name, event_date, adress, description, phone, event_time } = req.body;
     const newLink = {
@@ -118,10 +134,11 @@ router.post('/events_admin', isLoggedIn, async(req, res) => {
         event_time
     };
     await pool.query('INSERT INTO events set ?', [newLink]);
-    req.flash('success', 'Link saved successfully');
+    req.flash('success', 'Event saved successfully');
     res.redirect('/admin');
 });
 
+// Ruta para borrar eventos
 router.get('/event_delete/:id', isLoggedIn, async(req, res) => {
     const { id } = req.params;
     await pool.query('DELETE FROM events WHERE ID = ?', [id]);
@@ -129,12 +146,14 @@ router.get('/event_delete/:id', isLoggedIn, async(req, res) => {
     res.redirect('/admin');
 });
 
+// Ruta para editar eventos
 router.get('/event_edit/:id', isLoggedIn, async(req, res) => {
     const { id } = req.params;
     const events = await pool.query('SELECT * FROM events WHERE id = ?', [id]);
     res.render('edit', { events: events[0] });
 });
 
+// Actualizacion de eventos en la base de datos
 router.post('/event_edit/:id', isLoggedIn, async(req, res) => {
     const { id } = req.params;
     const { event_name, adress, event_date, description, phone, event_time } = req.body;
@@ -151,6 +170,7 @@ router.post('/event_edit/:id', isLoggedIn, async(req, res) => {
     res.redirect('/admin');
 });
 
+// Ruta para borrar reservas
 router.get('/booking_delete/:id', isLoggedIn, async(req, res) => {
     const { id } = req.params;
     await pool.query('DELETE FROM bookings WHERE ID = ?', [id]);

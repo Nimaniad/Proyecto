@@ -1,3 +1,4 @@
+{{!-- Vista del perfil del usuario en el que se le mostrarán las reservas que tiene hechas--}}
 <div class="container p-4 overflow-auto">
     <div class="row">
         <div class="col-md-12 conl-lg-12 col-sm-12 mx-auto columna">
@@ -18,6 +19,7 @@
                                     <th></th>
                                 </tr>
                             </thead>
+                            {{!-- Aquí se mostrará todas las reservas hechas por el usuario, donde también podrá caancelarlas --}}
                             {{#each bookings}}
                             <tr>
                                 <li>
@@ -25,11 +27,12 @@
                                     <td>{{bk_time}}</td>
                                     <td>{{phone}}</td>
                                     <td>
-                                        <a class="btn btn-danger" data-toggle="modal" data-target="#Modal1">
+                                        
+                                        <a class="btn btn-danger" data-toggle="modal" data-target="#Modal{{id}}">
                                             <i class="fas fa-trash-alt button-profile"></i>
                                         </a>
-                                        <!-- Modal for delete bookings -->
-                                        <div class="modal fade" id="Modal1" tabindex="-1" role="dialog"
+                                        <!-- Modal para borrar las reservas -->
+                                        <div class="modal fade" id="Modal{{id}}" tabindex="-1" role="dialog"
                                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
@@ -60,6 +63,7 @@
                                     </td>
                                 </li>
                             </tr>
+                            {{!-- Mensaje que aparecerá cuando no alla reservas --}}
                             {{else}}
                             <p>There are no bookings yet.</p>
                             <a href="/booking">Reserve one now!</a>

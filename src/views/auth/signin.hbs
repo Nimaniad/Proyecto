@@ -1,9 +1,11 @@
+{{!-- Vista para el logeo del usuario --}}
 <div class="container p-4 signin">
     <div class="row">
         <div class="col-me-4 mx-auto">
             <div class="card text-center ">
                 <div class="card-header">
                     <h3>SignIn</h3>
+                    {{!-- Botones con iconos de redes sociales distintas que cada una llevará al perfil de cada red --}}
                     <div class="box-social">
                         <a href="https://www.facebook.com/virtualoncanarias" target="_blank"><i
                                 class="fa fa-facebook fa-2x social-icons-2"></i></a>
@@ -13,6 +15,7 @@
                                 class="fa fa-instagram fa-2x social-icons-2"></i></a>
                     </div>
                 </div>
+                {{!-- Form group que recogerá los datos de Inicio de sesión --}}
                 <div class="card-body">
                     <form action="/signin" method="POST">
                         <div class="form-group">
@@ -21,6 +24,7 @@
                         <div class="form-group">
                             <input type="password" name="password" placeholder="Password" class="form-control">
                         </div>
+                        {{!-- Botón que verificará el Login y nos mandará a nuestro perfil --}}
                         <div class="form-group">
                             <button class="btn btn-success btn-block">SignIn</button>
                         </div>

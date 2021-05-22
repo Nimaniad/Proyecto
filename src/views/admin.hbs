@@ -1,3 +1,5 @@
+{{!-- Vista del perfil del Administrador
+El Administrador será aquel con id=1 --}}
 <div class="container p-4 overflow-auto">
     <div class="row">
         <div class="col-md-12 conl-lg-12 col-sm-12 mx-auto columna">
@@ -17,6 +19,7 @@
                                 </tr>
                             </thead>
                             </thead>
+                            {{!-- Se mostrará todas las reservas de todos los usuarios --}}
                             {{#each bookings}}
                             <tr>
                                 <li>
@@ -25,11 +28,11 @@
                                     <td>{{bk_time}}</td>
                                     <td>{{phone}}</td>
                                     <td>
-                                        <a class="btn btn-danger" data-toggle="modal" data-target="#Modal1">
+                                        <a class="btn btn-danger" data-toggle="modal" data-target="#Modal{{id}}">
                                             <i class="fas fa-trash-alt button-profile"></i>
                                         </a>
-                                        <!-- Modal for delete bookings -->
-                                        <div class="modal fade" id="Modal1" tabindex="-1" role="dialog"
+                                        <!-- Modal para verificar cuando quieres borrar reservas -->
+                                        <div class="modal fade" id="Modal{{id}}" tabindex="-1" role="dialog"
                                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
@@ -56,7 +59,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </td>
                                 </li>
                             </tr>
@@ -75,18 +77,19 @@
                                 </tr>
                             </thead>
                             </thead>
+                            {{!-- Se mostrará todos las eventos creados por el administrador --}}
                             {{#each events}}
                             <tr>
                                 <li>
                                     <td>{{event_name}}</td>
                                     <td>{{event_date}}</td>
                                     <td>
-                                        <a class="btn btn-danger" data-toggle="modal" data-target="#Modal2">
+                                        <a class="btn btn-danger" data-toggle="modal" data-target="#Modal{{id}}">
                                             <i class="fas fa-trash-alt button-profile"></i>
                                         </a>
 
-                                        <!-- Modal for delete event -->
-                                        <div class="modal fade" id="Modal2" tabindex="-1" role="dialog"
+                                        <!-- Modal para verificar que quieres borrar un evento -->
+                                        <div class="modal fade" id="Modal{{id}}" tabindex="-1" role="dialog"
                                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
@@ -128,6 +131,7 @@
                             {{/each}}
                         </table>
                     </ul>
+                    {{!-- Botón solo para el Administrador para que pueda crear eventos--}}
                     <div class="card text-center events mt-4">
                         <a href="/events_admin" class="btn btn-info ">
                             Create new event

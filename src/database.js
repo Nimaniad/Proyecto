@@ -1,11 +1,13 @@
+// Script de conexión de la base de datos
 const mysql = require('mysql');
 const { promisify } = require('util');
-
 const { database } = require('./keys');
 
 const pool = mysql.createPool(database);
 
+// Conexion con la Base de Datos
 pool.getConnection((err, conection) => {
+    // Si fallara
     if (err) {
         if (err.code === 'PROTOCON_CONNECTION_LOST') {
             console.error('DATABASE CONECTION WAS CLOSED');
@@ -18,6 +20,7 @@ pool.getConnection((err, conection) => {
         }
     }
 
+    // Si conecta correctamente
     if (conection) conection.release();
     console.log('DATABASE CONNECTED');
     return;
