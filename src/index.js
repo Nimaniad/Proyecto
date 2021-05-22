@@ -13,7 +13,7 @@ const { database } = require('./keys');
 
 // Inicializaciones
 const app = express();
-require('./lib/passport');
+require('./lib/passport'); //Inicializacion de la autentificación
 
 
 // Configuracion
@@ -48,7 +48,7 @@ app.use(express.urlencoded({ extended: false }));
 // Metodo para extender el tipo de variables que podemos recibir por el usuario
 app.use(express.json());
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session()); // Inicializacion de passport
 
 
 // Variables Globales
